@@ -1,4 +1,16 @@
-﻿New-Item -Path C:\inetpub\wwwroot\master -ItemType Directory
+#Download repo from Github
+$url = "https://github.com/tshwangq/IISDeploy/archive/master.zip"
+$output = "c:\master.zip"
+
+(New-Object System.Net.WebClient).DownloadFile($url, $output)
+
+#Extract the .zip files to folder
+$ExtractDir = 'C:\Zip'
+$ExtShell = New-Object -ComObject Shell.Application
+$file = $ExtShell.NameSpace($output).Items()
+$ExtShell.NameSpace($ExtractDir).CopyHere($file)
+
+New-Item -Path C:\inetpub\wwwroot\master -ItemType Directory
 $zipfilename = 'C:\master.zip'
 $destination = 'C:\inetpub\wwwroot\master'
 
